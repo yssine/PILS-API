@@ -1,10 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Query
 from typing import Optional
 from pydantic import BaseModel
 import sqlite3
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from databases import Database
+from pydantic import Json
 
 # conn = Database("sqlite:///SYSPI.db")
 # conn.connect()
@@ -48,6 +49,8 @@ def post_values(uuid:str, sens:Sensors):
 
 @app.get("/get-val/")
 def get_values(uuid:str):
+# def get_values(q: Json = Query()):
+    # uuid = q['uuid']
     # print("Harrow")
     # try:
         # print(conn)
@@ -57,22 +60,20 @@ def get_values(uuid:str):
     # query = f"""SELECT * FROM  esp WHERE uuid = {uuid}"""
     # print(query)
     try:
-        print("hola")
+        # print("hola")
         res = conn.execute("""SELECT * FROM  esp WHERE uuid = :uuid""",{'uuid' : uuid}).fetchone()
         data = Sensors(soil=res[1],temp=res[2],hum=res[3],light=res[4])
         return data
     except:
         return {"message": "UUID does not exists"}, 404
-    # res = conn.execute(query)
-    # res = conn.fetch_all(query=query)
-    # print(res)
-    # data=Sensors()
-    # conn.
-    # finally: 
-    #     pass
-    # conn.commit()
-    return {'message': "ok"}
 
+
+
+
+@app.get("/")
+def home():
+    return {"Project's Name" : "PILS-SISPI"},200
+    
 
 
 
