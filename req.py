@@ -5,8 +5,8 @@ url="http://greengardian-api.onrender.com/"
 
 
 data={
-  "soil": 58,
-  "temp": 28.4,
+  "soil": 38,
+  "temp": 25.4,
   "hum": 69.6,
   "light": 1862.0
 }

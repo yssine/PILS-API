@@ -38,7 +38,7 @@ def post_values(uuid:str, sens:Sensors):
                     temp = :temp,
                     hum = :hum,
                     light = :light WHERE uuid = :id""",
-                    {'id' : uuid, 'soil': sens.soil, 'temp' : sens.temp, 'hum' : sens.hum, 'light' : sens.light})
+                    {'id' : uuid, 'soil': round(sens.soil, 2), 'temp' : round(sens.temp, 2), 'hum' : round(sens.hum, 2), 'light' : round(sens.light, 2)})
     # finally: 
     #     pass
     conn.commit()
